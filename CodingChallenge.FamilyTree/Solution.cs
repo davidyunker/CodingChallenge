@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodingChallenge.FamilyTree
@@ -7,22 +8,42 @@ namespace CodingChallenge.FamilyTree
     {
         public string GetBirthMonth(Person person, string descendantName)
         {
-            bool contains = person.Descendants.Any(d => d.Name == descendantName);
-            //if any of the decendants of the person have this name, then return true  
+            //bool contains = person.Descendants.Any(d => d.Name == descendantName);
+            ////if any of the decendants of the person have this name, then return true  
 
-            if (contains)
+            //if (contains)
+            //{
+            //    Person myPerson = person.Descendants.Find(d => d.Name == descendantName);
+
+            //    string birthMonth = myPerson.Birthday.ToString("MMMM");
+
+            //    return birthMonth;
+            //}
+
+
+            Person chosenOne = null;
+            String birthDate = "";
+            var family = new List<Person> { person };
+            foreach (var d in person.Descendants)
             {
-                Person myPerson = person.Descendants.Find(d => d.Name == descendantName);
-
-                string birthMonth = myPerson.Birthday.ToString("MMMM");
-
-                return birthMonth;
+                family.Add(d);
+                foreach (var d2 in d.Descendants)
+                {
+                    family.Add(d2);
+                }
             }
-
-            else
+            foreach (var f in family)
             {
-                throw new NotImplementedException();
+                if (f.Name == descendantName)
+                {
+                    chosenOne = f;
+                    birthDate = f.Birthday.ToString("MMMM");
+                }
+
+              
             }
+            return birthDate;
+           
         }
     }
 }

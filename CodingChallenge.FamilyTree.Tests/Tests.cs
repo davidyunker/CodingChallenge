@@ -9,43 +9,26 @@ namespace CodingChallenge.FamilyTree.Tests
     public class TreeTests
     {
         
-        [Theory]
+        [Fact]
+
+        public void testsWork()
+        {
+            bool isWorking = true;
+
+            Assert.True(isWorking); 
+        }
+
+        [Fact]
         public void if_the_person_exists_in_tree_the_result_should_be_january()
         {
-            var Ted = new Person
-            {
-                Name = "Ted",
-                Birthday = DateTime.Parse("5/5/1950"),
-                Descendants = new List<Person>
-                {
-                    new Person
-                    {
-                        Name = "Sally",
-                        Birthday = DateTime.Parse("4/5/1965"),
-                        Descendants = new List<Person>
-                        {
-                            new Person {Name = "Bob", Birthday = DateTime.Parse("9/5/1995")}
-                        }
-                    },
-                    new Person
-                    {
-                        Name = "Jim",
-                        Birthday = DateTime.Parse("3/5/1966"),
-                        Descendants = new List<Person>
-                        {
-                            new Person {Name = "Joe", Birthday = DateTime.Parse("1/5/1985")},
-                            new Person {Name = "George", Birthday = DateTime.Parse("6/5/1995")}
-                        }
-                    }
-                }
-            };
 
 
-            var result = new Solution().GetBirthMonth(Ted, "Joe");
-            Assert.Equal(result, "January");
+            var tree = FamilyTreeGenerator.Make();
+            var result = new Solution().GetBirthMonth(tree, "Joe");
+            Assert.Equal(result, "January"); 
         }
            
-        [Theory]
+        [Fact]
         public void if__the_person_exists_at_the_top_tree_the_result_should_be_may()
         {
             var tree = FamilyTreeGenerator.Make();
